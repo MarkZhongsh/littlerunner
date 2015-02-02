@@ -59,5 +59,26 @@ void TollgateScene::initBG()
 
 void TollgateScene::update(float delta)
 {
-	
+    int posX1 = m_bgSprite1->getPositionX();
+    int posX2 = m_bgSprite2->getPositionX();
+
+    int speed = 1;
+    posX1 -= speed;
+    posX2 -= speed;
+
+    CCSize bg1Size = m_bgSprite1->getContentSize();
+    if(posX1 < -bg1Size.width/2)
+    {
+        posX1 = bg1Size.width/2 + bg1Size.width-1;
+    }
+
+    CCSize bg2Size = m_bgSprite2->getContentSize();
+    if(posX2 < -bg2Size.width/2)
+    {
+        posX2 = bg2Size.width/2 + bg2Size.width-1;
+    }
+
+    m_bgSprite1->setPositionX(posX1);
+    m_bgSprite2->setPositionX(posX2);
+
 }
