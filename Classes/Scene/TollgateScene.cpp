@@ -14,7 +14,6 @@ CCScene* TollgateScene::scene()
 {
 	CCScene* scene = CCScene::create();
 	TollgateScene* layer = TollgateScene::create();
-	CCLOG("create tollgatescene layer");
 	scene->addChild(layer);
 	return scene;
 }
@@ -36,6 +35,7 @@ bool TollgateScene::init()
 		this->addChild(m_player,1);
 		initBG();
 
+		this->scheduleUpdate();
 		bRet = true;
 	}while(!bRet);
 	return bRet;
@@ -57,4 +57,7 @@ void TollgateScene::initBG()
 }
 
 
-
+void TollgateScene::update(float delta)
+{
+	
+}

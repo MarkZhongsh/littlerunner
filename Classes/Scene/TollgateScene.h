@@ -12,6 +12,8 @@ public:
 	virtual bool init();
 	static cocos2d::CCScene* scene();
 	CREATE_FUNC(TollgateScene);
+	virtual void update(float delta);
+
 private:
 	void initBG();
 private:
