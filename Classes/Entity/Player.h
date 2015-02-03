@@ -11,6 +11,10 @@ public:
 	~Player();
 	virtual bool init();
 	CREATE_FUNC(Player);
+	void jump();
+	void jumpEnd();
+private:
+	bool m_bJumping;
 };
 
 #endif

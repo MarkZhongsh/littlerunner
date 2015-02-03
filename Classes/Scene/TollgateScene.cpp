@@ -1,6 +1,8 @@
 #include "TollgateScene.h"
+#include "../MonsterSelector/MonsterSelector.h"
 
 USING_NS_CC; 
+using namespace cocos2d::extension;
 
 TollgateScene::TollgateScene()
 {
@@ -34,6 +36,11 @@ bool TollgateScene::init()
 		m_player->setPosition(ccp(200,visibleSize.height / 4));
 		this->addChild(m_player,1);
 		initBG();
+		createJumpBtn();
+
+		//创建怪物
+		MonsterSelector* monSel = MonsterSelector::create();
+		this->addChild(monSel,4);
 
 		this->scheduleUpdate();
 		bRet = true;
@@ -81,4 +88,25 @@ void TollgateScene::update(float delta)
     m_bgSprite1->setPositionX(posX1);
     m_bgSprite2->setPositionX(posX2);
 
+}
+
+void TollgateScene::createJumpBtn()
+{
+	CCLabelTTF* jumpTitle = CCLabelTTF::create("Jump","Arial",35);
+	CCScale9Sprite* norBg = CCScale9Sprite::create("JumpNormal.png");
+	CCScale9Sprite* selectedBg = CCScale9Sprite::create("JumpSelected.png");
+	CCControlButton* jumpBtn = CCControlButton::create(jumpTitle,norBg);
+
+	CCSize visibleSize = CCDirector::sharedDirector()->getVisibleSize();
+	CCSize norBgSize = norBg->getContentSize();
+	jumpBtn->setPosition(ccp(visibleSize.width-norBgSize.width,50));
+	jumpBtn->setBackgroundSpriteForState(selectedBg,CCControlStateHighlighted);
+
+	jumpBtn->addTargetWithActionForControlEvents(this,cccontrol_selector(TollgateScene::jumpBtnEvents),CCControlEventTouchDown);
+	this->addChild(jumpBtn,2);
+}
+
+void TollgateScene::jumpBtnEvents(CCObject* pSender,CCControlEvent event)
+{
+	m_player->jump();
 }
