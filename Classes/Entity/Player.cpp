@@ -9,6 +9,7 @@ USING_NS_CC;
 Player::Player()
 {
 	m_bJumping = false;
+	m_hp = 1000;
 }
 
 Player::~Player()
@@ -47,4 +48,31 @@ void Player::jump()
 void Player::jumpEnd()
 {
 	m_bJumping = false;
+}
+
+void Player::hit()
+{
+	if(getSprite() == NULL)
+	{
+		return ;
+	}
+	m_hp -= 15;
+	if(m_hp < 0)
+	{
+		m_hp = 0;
+	}
+
+}
+
+CCRect Player::getBoundingBox()
+{
+	CCSize size = getSprite()->getContentSize();
+	CCPoint entityPos = getPosition();
+
+	return CCRect(entityPos.x - size.width/2,entityPos.y - size.height/2,size.width,size.height);
+}
+
+int Player::getHP()
+{
+	return m_hp;
 }

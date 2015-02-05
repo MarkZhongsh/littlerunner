@@ -40,6 +40,7 @@ bool TollgateScene::init()
 
 		//创建怪物
 		MonsterSelector* monSel = MonsterSelector::create();
+		monSel->bindPlayer(m_player);
 		this->addChild(monSel,4);
 
 		this->scheduleUpdate();

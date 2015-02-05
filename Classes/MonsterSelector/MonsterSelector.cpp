@@ -36,6 +36,14 @@ void MonsterSelector::update(float dt)
 			{
 				monster->hide();
 			}
+			else if(m_player)
+			{
+				if(monster->isCollideWithPlayer(m_player))
+				{
+					m_player->hit();
+					monster->hide();
+				}
+			}
 		}
 		else
 		{
@@ -59,5 +67,10 @@ void MonsterSelector::createMonter()
 		this->addChild(monster);
 		m_monterArr->addObject(monster);
 	}
+}
+
+void MonsterSelector::bindPlayer(Player* player)
+{
+	m_player = player;
 }
 

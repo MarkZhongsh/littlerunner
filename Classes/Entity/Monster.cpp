@@ -1,5 +1,7 @@
 #include "Monster.h"
 
+USING_NS_CC;
+
 Monster::Monster()
 {
 	m_isAlive = false;
@@ -49,4 +51,12 @@ void Monster::reset()
 bool Monster::isAlive()
 {
 	return m_isAlive;
+}
+
+bool Monster::isCollideWithPlayer(Player* player)
+{
+	CCRect entityRect = player->getBoundingBox();
+	CCPoint monsterPos = getPosition();
+
+	return entityRect.containsPoint(monsterPos);
 }
