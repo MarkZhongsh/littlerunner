@@ -9,7 +9,8 @@ SOURCES = main.cpp \
         ../Classes/Entity/Player.cpp \
         ../Classes/Scene/TollgateScene.cpp \
         ../Classes/Entity/Monster.cpp \
-        ../Classes/MonsterSelector/MonsterSelector.cpp
+        ../Classes/MonsterSelector/MonsterSelector.cpp \
+        ../Classes/Splash/FlowWord.cpp
 
 COCOS_ROOT = ../../..
 include $(COCOS_ROOT)/cocos2dx/proj.linux/cocos2dx.mk
