@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "cocos2d.h"
 #include "cocos-ext.h"
+#include "../Splash/FlowWord.h"
 //#include "CCActionInterval.h"
 
 using namespace cocos2d::extension;
@@ -42,7 +43,8 @@ void Player::jump()
 	CCCallFunc* jumpCall = CCCallFunc::create(this,callfunc_selector(Player::jumpEnd));
 
 	CCActionInterval* jumpActions = CCSequence::create(jump,jumpCall,NULL);
-	getSprite()->runAction(jumpActions);
+	//getSprite()->runAction(jumpActions);
+	this->runAction(jumpActions);
 }
 
 void Player::jumpEnd()
@@ -56,6 +58,15 @@ void Player::hit()
 	{
 		return ;
 	}
+
+	FlowWord* flowWord = FlowWord::create();
+	this->addChild(flowWord);
+	flowWord->showWord("-15",getSprite()->getPosition());
+
+	CCMoveBy* backMove = CCMoveBy::create(0.1f,ccp(-20,0));
+	CCMoveBy* forwardMove = CCMoveBy::create(0.1f,ccp(20,0));
+	CCRotateBy* backRotate = CCRotateBy::create(0.1f,-5,0);
+	CCRotateBy forwardRotate = CCRotateBy::create(0.1f,-5,0);
 	m_hp -= 15;
 	if(m_hp < 0)
 	{
@@ -69,7 +80,8 @@ CCRect Player::getBoundingBox()
 	CCSize size = getSprite()->getContentSize();
 	CCPoint entityPos = getPosition();
 
-	return CCRect(entityPos.x - size.width/2,entityPos.y - size.height/2,size.width,size.height);
+	CCLOG("%f,%f",entityPos.x,entityPos.y);
+	return CCRect(entityPos.x/2,entityPos.y/2,size.width,size.height);
 }
 
 int Player::getHP()
